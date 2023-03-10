@@ -65,7 +65,7 @@ document.addEventListener('alpine:init', () => {
       const pubKeyCredParams: PublicKeyCredentialParameters[] = [];
 
       if (signatureAlgorithms === '') {
-        pubKeyCredParams.push({ alg: -7, type: 'public-key' });
+        pubKeyCredParams.push({ alg: -7, type: 'public-key' }, { alg: -257, type: 'public-key' });
 
         return pubKeyCredParams;
       }
