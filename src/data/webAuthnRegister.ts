@@ -73,11 +73,18 @@ document.addEventListener('alpine:init', () => {
       const signatureAlgorithmsList = signatureAlgorithms.split(',');
 
       signatureAlgorithmsList.forEach((value) => {
-        pubKeyCredParams.push({
-          alg: parseInt(value),
-          type: 'public-key',
-        });
+        const coseAlgId = parseInt(value);
+        if (!Number.isNaN(coseAlgId)) {
+          pubKeyCredParams.push({
+            alg: coseAlgId,
+            type: 'public-key',
+          });
+        }
       });
+
+      if (pubKeyCredParams.length === 0) {
+        throw new DOMException("NotSupportedError");
+      }
 
       return pubKeyCredParams;
     };
